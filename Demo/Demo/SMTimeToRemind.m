@@ -13,20 +13,14 @@
 - (void)startRemindWithDate:(NSDate *)date
 {
     
-    NSCalendar *calendar = [NSCalendar currentCalendar];
-    NSDateComponents *compt =[calendar components:(NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond | NSCalendarUnitDay | NSCalendarUnitMonth) fromDate:date];
-    
     //开启子线程监听时间改变
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         
         
-        while (1) {
+        while (1) {//循环对比当前时间
             NSDate *currentDate = [NSDate date];
-
-            NSDateComponents *currentCompt =[calendar components:(NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond | NSCalendarUnitDay | NSCalendarUnitMonth) fromDate:currentDate];
             
-            //这里我就不对比年了，时间太长了吧。。。。
-            if (compt.hour == currentCompt.hour && compt.minute == currentCompt.minute && compt.second == currentCompt.second && compt.day == currentCompt.day && compt.month == currentCompt.month) {
+            if ([date isEqualToDate:currentDate]) {
                 break;
             }
             
@@ -44,20 +38,14 @@
 
 - (void)startRemindWithDate:(NSDate *)date didremind:(remind)remind
 {
-    NSCalendar *calendar = [NSCalendar currentCalendar];
-    NSDateComponents *compt =[calendar components:(NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond | NSCalendarUnitDay | NSCalendarUnitMonth) fromDate:date];
-    
     //开启子线程监听时间改变
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         
         
-        while (1) {
+        while (1) {//循环对比当前时间
             NSDate *currentDate = [NSDate date];
             
-            NSDateComponents *currentCompt =[calendar components:(NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond | NSCalendarUnitDay | NSCalendarUnitMonth) fromDate:currentDate];
-            
-            //这里我只对比了时、分、秒
-            if (compt.hour == currentCompt.hour && compt.minute == currentCompt.minute && compt.second == currentCompt.second && compt.day == currentCompt.day && compt.month == currentCompt.month) {
+            if ([date isEqualToDate:currentDate]) {
                 break;
             }
             

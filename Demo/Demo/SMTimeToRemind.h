@@ -8,6 +8,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 typedef void (^remind) ();
 
 @class SMTimeToRemind;
@@ -26,15 +27,22 @@ typedef void (^remind) ();
  *
  *  @param date 需要什么时间提醒
  */
-- (void)startRemindWithDate:(NSDate *)date;
+
+- (void)startRemindWithDate:(NSDate *)RemindTime;
 
 /**
- *  开始监听时间，到时回调代理方法
+ *  开始监听时间，到时回调block
  *
  *  @param date 需要什么时间提醒
  */
-- (void)startRemindWithDate:(NSDate *)date didremind:(remind)remind;
+- (void)startRemindWithDate:(NSDate *)RemindTime didremind:(remind)remind;
 
+/**
+ *  记录程序被关闭的时间点,请在“applicationWillTerminate”方法中调用
+ */
++ (void)recordTerminateTime;
+
+//+ (void)setLocalNotificationWithTime:(NSDate *)RemindTime;
 
 @property (nonatomic, assign) id<SMtimeToRemindDelegate> delegate;
 @end
